@@ -28,6 +28,6 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '.'
+    targetPath: '$(Build.Repository.LocalPath)/.git'
     artifact: 'Git'
     publishLocation: 'pipeline'
