@@ -22,5 +22,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      $env:GIT_TERMINAL_PROMPT = 1;
       "host=github.com
-      protocol=https" | git credential fill
+      protocol=https" | git credential fill;
