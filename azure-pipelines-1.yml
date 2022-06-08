@@ -26,3 +26,8 @@ steps:
 #       "host=github.com
 #       protocol=https" | git credential fill;
 
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.Repository.LocalPath)'
+    artifact: 'Git'
+    publishLocation: 'pipeline'
