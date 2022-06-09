@@ -18,16 +18,13 @@ steps:
     echo oops
   displayName: 'Run a multi-line script'
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       $env:GIT_TERMINAL_PROMPT = 1;
-#       "host=github.com
-#       protocol=https" | git credential fill;
-
-- task: PublishPipelineArtifact@1
+- task: PowerShell@2
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/.git'
-    artifact: 'Git'
-    publishLocation: 'pipeline'
+    targetType: 'inline'
+    script: 'Get-Process'
+
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Build.Repository.LocalPath)/.git'
+#     artifact: 'Git'
+#     publishLocation: 'pipeline'
