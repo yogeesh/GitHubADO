@@ -67,7 +67,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'AgentDump.bin'
+    targetPath: 'AgentDump.dmp'
     artifact: 'Dump'
     publishLocation: 'pipeline'
     
