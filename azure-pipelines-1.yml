@@ -59,7 +59,7 @@ steps:
     targetType: 'inline'
     script: |
       $source = 'https://download.sysinternals.com/files/Procdump.zip'
-      Invoke-RestMethod -Uri $source
+      Invoke-RestMethod -Uri $source -OutFile Procdump.zip
 
       Expand-Archive Procdump.zip
 
