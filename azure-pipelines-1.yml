@@ -46,11 +46,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Get-Process
-      $PID = Get-Process -name Agent.Listener | select -expand id
-      Write-Host $PID
+      $AgentListerPID = Get-Process -name Agent.Listener | select -expand id
+      Write-Host $AgentListerPID
       
-      rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $PID dump_file.bin full
+      rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $AgentListerPID dump_file.bin full
 
 - task: PublishPipelineArtifact@1
   inputs:
