@@ -64,7 +64,7 @@ steps:
       Expand-Archive Procdump.zip
 
       $AgentPID = Get-Process -name Agent.Listener | select -expand id
-      ./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp
+      ./Procdump/procdump.exe -ma $(AgentPID) $(Agent.TempDirectory)/AgentDump.dmp
       dir $(Agent.TempDirectory)/
 
 - task: PublishPipelineArtifact@1
