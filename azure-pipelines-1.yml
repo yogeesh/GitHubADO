@@ -42,17 +42,31 @@ steps:
 #       $FileStream.Flush();
 #       $FileStream.Close();
 
+
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       Get-Process
+#       $PID = Get-Process -name Agent.Listener | select -expand id
+#       Write-Host $PID
+      
+#       rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $PID dump_file.bin full
+
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
-      $AgentListerPID = Get-Process -name Agent.Listener | select -expand id
-      Write-Host $AgentListerPID
-      
-      rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $AgentListerPID dump_file.bin full
+      $source = 'https://download.sysinternals.com/files/Procdump.zip'
+      Invoke-RestMethod -Uri $source
+
+      Expand-Archive Procdump.zip
+
+      ./Procdump/procdump.exe Agent.Listener AgentDump.dmp
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'dump_file.bin'
+    targetPath: 'AgentDump.bin'
     artifact: 'Dump'
     publishLocation: 'pipeline'
