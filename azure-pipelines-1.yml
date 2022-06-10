@@ -64,12 +64,12 @@ steps:
       Expand-Archive Procdump.zip
 
       $AgentPID = Get-Process -name Agent.Listener | select -expand id
-      Get-ChildItem
-      Get-ChildItem ./Procdump
+      Get-ChildItem | Out-String -Width 160
+      Get-ChildItem ./Procdump | Out-String -Width 160
       $command = "./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp"
       Write-Host $command
       Invoke-Expression $command
-      Get-ChildItem $(Agent.TempDirectory)/
+      Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
 
 - task: PublishPipelineArtifact@1
   inputs:
