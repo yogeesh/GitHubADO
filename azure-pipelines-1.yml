@@ -64,7 +64,7 @@ steps:
       Expand-Archive Procdump.zip
 
       $AgentPID = Get-Process -name Agent.Listener | select -expand id
-      $command = "./Procdump/procdump.exe -ma $(AgentPID) $(Agent.TempDirectory)/AgentDump.dmp"
+      $command = "./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp"
       Invoke-Expression $command
       dir $(Agent.TempDirectory)/
 
