@@ -48,10 +48,10 @@ steps:
 #     targetType: 'inline'
 #     script: |
 #       Get-Process
-#       $PID = Get-Process -name Agent.Listener | select -expand id
+#       $AgentPID = Get-Process -name Agent.Listener | select -expand id
 #       Write-Host $PID
       
-#       rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $PID dump_file.bin full
+#       rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $AgentPID dump_file.bin full
 
 
 - task: PowerShell@2
@@ -63,7 +63,8 @@ steps:
 
       Expand-Archive Procdump.zip
 
-      ./Procdump/procdump.exe Agent.Listener $(Agent.TempDirectory)/AgentDump.dmp
+      $AgentPID = Get-Process -name Agent.Listener | select -expand id
+      ./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp
       dir $(Agent.TempDirectory)/
 
 - task: PublishPipelineArtifact@1
