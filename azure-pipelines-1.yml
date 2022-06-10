@@ -63,11 +63,11 @@ steps:
 
       Expand-Archive Procdump.zip
 
-      ./Procdump/procdump.exe Agent.Listener AgentDump.dmp
+      ./Procdump/procdump.exe Agent.Listener $(Agent.TempDirectory)/AgentDump.dmp
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'AgentDump.dmp'
+    targetPath: '$(Agent.TempDirectory)/AgentDump.dmp'
     artifact: 'Dump'
     publishLocation: 'pipeline'
     
