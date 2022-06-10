@@ -46,7 +46,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $PID = Get-Process -name Agent.Listener.exe | select -expand id
+      Get-Process
+      $PID = Get-Process -name Agent.Listener | select -expand id
       Write-Host $PID
       
       rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $PID dump_file.bin full
