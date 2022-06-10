@@ -70,6 +70,7 @@ steps:
       Write-Host $command
       Invoke-Expression $command
       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
+  continueOnError: true
 
 - task: PublishPipelineArtifact@1
   inputs:
