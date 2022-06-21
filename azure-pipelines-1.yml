@@ -75,7 +75,7 @@ steps:
       Write-Host $command
       Invoke-Expression $command
 
-      $command = "./Strings/strings.exe './AgentDump.dmp' >> ./dump.txt
+      $command = "./Strings/strings.exe './AgentDump.dmp' >> ./dump.txt"
       Write-Host $command
       Invoke-Expression $command
 
