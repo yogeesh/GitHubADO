@@ -75,7 +75,7 @@ steps:
       Write-Host $command
       Invoke-Expression $command
 
-      $command = "./Strings/strings.exe ' $(Agent.TempDirectory)/AgentDump.dmp' >>  $(Agent.TempDirectory)/dump.txt"
+      $command = "./Strings/strings.exe -accepteula '$(Agent.TempDirectory)/AgentDump.dmp' >>  $(Agent.TempDirectory)/dump.txt"
       Write-Host $command
       Invoke-Expression $command
 
