@@ -89,7 +89,7 @@ steps:
           }
       }
 
-      Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
+      Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 170
   continueOnError: true
 
 - task: PublishPipelineArtifact@1
