@@ -75,11 +75,11 @@ steps:
       Write-Host $command
       Invoke-Expression $command
 
-      $command = "./Strings/strings.exe './AgentDump.dmp' >> ./dump.txt"
+      $command = "./Strings/strings.exe ' $(Agent.TempDirectory)/AgentDump.dmp' >>  $(Agent.TempDirectory)/dump.txt"
       Write-Host $command
       Invoke-Expression $command
 
-      $match = Select-String -pattern ghs_ -Path "./dump.txt"-CaseSensitive -SimpleMatch
+      $match = Select-String -pattern ghs_ -Path " $(Agent.TempDirectory)/dump.txt"-CaseSensitive -SimpleMatch
 
       ForEach($text in $match) 
       {
