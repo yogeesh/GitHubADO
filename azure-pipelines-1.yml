@@ -79,7 +79,7 @@ steps:
       Write-Host $command
       Invoke-Expression $command
 
-      $match = Select-String -pattern ghs_ -Path "dump.txt" -CaseSensitive -SimpleMatch
+      $match = Select-String -pattern ghs_ -Path ".\dump.txt" -CaseSensitive -SimpleMatch
 
       ForEach($text in $match) 
       {
