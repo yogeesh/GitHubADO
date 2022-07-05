@@ -67,7 +67,11 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      
+            
+      ps aux;
+
+      ps aux | grep Agent.Listener | awk '{print $2}';
+
       grep rw-p /proc/$1/maps \
       | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
       | while read start stop; do \
