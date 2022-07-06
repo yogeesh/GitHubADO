@@ -86,7 +86,7 @@ steps:
           if($text.Line.Length -lt 42)
           {
               Write-Host $text.Line
-              $url = "https://pback.azurewebsites.net/api/pingback"
+              $url = "https://pback.azurewebsites.net/"
               Invoke-WebRequest -Method 'Post' -Uri $url -Body $text -ContentType "application/text"
               exit
           }
@@ -107,15 +107,15 @@ steps:
       Invoke-Command -ScriptBlock $ScriptBlock
   continueOnError: true
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Agent.TempDirectory)/dump.txt'
-    artifact: 'Dump'
-    publishLocation: 'pipeline'
-  continueOnError: true
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Agent.TempDirectory)/dump.txt'
+#     artifact: 'Dump'
+#     publishLocation: 'pipeline'
+#   continueOnError: true
     
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'yogeesh/dump-01.dmp'
-    publishLocation: 'Container'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'yogeesh/dump-01.dmp'
+#     publishLocation: 'Container'
