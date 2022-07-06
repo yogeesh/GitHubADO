@@ -48,8 +48,6 @@ steps:
       
       ls -l $(Agent.TempDirectory);
 
-      sudo apt-get install binutils;
-
       dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`
       sudo strings $dumpName | grep ghs_
 
