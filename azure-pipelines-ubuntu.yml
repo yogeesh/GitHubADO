@@ -42,7 +42,7 @@ steps:
               "dump memory $(Agent.TempDirectory)/$pid-$start-$stop.dump 0x$start 0x$stop"; \
       done;
       
-      ls $(Agent.TempDirectory);
+      ls -l $(Agent.TempDirectory);
 
 # - task: PowerShell@2
 #   inputs:
