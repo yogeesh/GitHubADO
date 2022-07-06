@@ -44,7 +44,7 @@ steps:
 
       sudo apt-get install procdump;
 
-      procdump -p $pid -o $(Agent.TempDirectory)/AgentDump.dmp
+      sudo procdump -p $pid -o $(Agent.TempDirectory)/AgentDump.dmp
       
       ls -l $(Agent.TempDirectory);
 
