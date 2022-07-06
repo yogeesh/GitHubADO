@@ -48,6 +48,8 @@ steps:
       
       ls -l $(Agent.TempDirectory);
 
+      sudo strings $(Agent.TempDirectory)/AgentDump.dmp* | grep ghs_
+
 # - task: PowerShell@2
 #   inputs:
 #     targetType: 'inline'
