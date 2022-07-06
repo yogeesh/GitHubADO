@@ -50,7 +50,8 @@ steps:
 
       sudo apt-get install binutils;
 
-      sudo strings $(Agent.TempDirectory)/AgentDump.dmp* | grep ghs_
+      dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`
+      sudo strings $(Agent.TempDirectory)/$dumpName | grep ghs_
 
 # - task: PowerShell@2
 #   inputs:
