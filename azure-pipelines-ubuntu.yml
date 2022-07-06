@@ -52,7 +52,9 @@ steps:
       echo $dumpName;
       strings $dumpName -n 50 >> $(Agent.TempDirectory)/dump.txt;
 
-      cat $(Agent.TempDirectory)/dump.txt | grep "ghs_";
+      cat $(Agent.TempDirectory)/dump.txt | grep "ghs";
+      echo "lol";
+      
   continueOnError: true
 
 # - task: PowerShell@2
