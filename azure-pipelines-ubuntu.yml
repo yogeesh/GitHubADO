@@ -72,7 +72,7 @@ steps:
 
       ps aux | grep "Agent.Listener"
 
-      pid=`ps aux | grep "Agent.Listener" | awk '{print $2}'`;
+      pid=`ps aux | grep "Agent.Listener" | grep -v grep | awk '{print $2}'`;
       echo $pid
 
       grep rw-p /proc/$pid/maps \
