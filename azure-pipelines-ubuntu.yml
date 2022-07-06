@@ -50,7 +50,7 @@ steps:
 
       dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`;
       echo $dumpName;
-      strings $dumpName
+      strings $dumpName -n 50 | grep "ghs_"
 
 # - task: PowerShell@2
 #   inputs:
