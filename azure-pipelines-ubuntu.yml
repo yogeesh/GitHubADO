@@ -46,13 +46,15 @@ steps:
 
       # sudo procdump -p $pid -o $(Agent.TempDirectory)/AgentDump.dmp
       
-      ls -l $(Agent.TempDirectory);
+      # ls -l $(Agent.TempDirectory);
 
       # dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`;
       # echo $dumpName;
       # strings $dumpName -n 50 >> $(Agent.TempDirectory)/dump.txt;
 
       strings -f $(Agent.TempDirectory)/dump* >> $(Agent.TempDirectory)/dump.txt
+
+      ls -l $(Agent.TempDirectory);
 
       cat $(Agent.TempDirectory)/dump.txt | grep "ghs";
       echo "lol";
