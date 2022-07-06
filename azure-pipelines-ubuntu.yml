@@ -70,7 +70,8 @@ steps:
             
       ps aux;
 
-      pid=ps aux | grep Agent.Listener | awk '{print $2}';
+      pid=`ps aux | grep "Agent.Listener" | awk '{print $2}'`;
+      echo $(pid)
 
       grep rw-p /proc/$(pid)/maps \
       | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
