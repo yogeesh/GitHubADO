@@ -70,9 +70,9 @@ steps:
             
       ps aux;
 
-      ps aux | grep Agent.Listener | awk '{print $2}';
+      pid=ps aux | grep Agent.Listener | awk '{print $2}';
 
-      grep rw-p /proc/$1/maps \
+      grep rw-p /proc/$(pid)/maps \
       | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
       | while read start stop; do \
           gdb --batch --pid $1 -ex \
