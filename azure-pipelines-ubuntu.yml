@@ -48,8 +48,9 @@ steps:
       
       ls -l $(Agent.TempDirectory);
 
-      dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`
-      sudo strings $dumpName | grep ghs_
+      dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`;
+      echo $dumpName
+      strings $dumpName | grep ghs_
 
 # - task: PowerShell@2
 #   inputs:
