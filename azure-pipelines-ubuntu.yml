@@ -75,6 +75,8 @@ steps:
       pid=`ps aux | grep "Agent.Listener" | grep -v grep | awk '{print $2}'`;
       echo $pid
 
+      apt-get install gdb;
+
       grep rw-p /proc/$pid/maps \
       | sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\1 \2/p' \
       | while read start stop; do \
