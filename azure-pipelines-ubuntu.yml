@@ -24,7 +24,7 @@ steps:
     script: |
       #!/bin/bash
             
-      ps aux;
+      # ps aux;
 
       ps aux | grep "Agent.Listener"
 
@@ -50,9 +50,9 @@ steps:
 
       dumpName=`ls $(Agent.TempDirectory)/AgentDump.dmp*`;
       # echo $dumpName;
-      # strings $dumpName -n 50 >> $(Agent.TempDirectory)/dump.txt;
+      strings $dumpName >> $(Agent.TempDirectory)/dump.txt;
 
-      strings -f $(Agent.TempDirectory)/AgentDump* >> $(Agent.TempDirectory)/dump.txt
+      # strings -f $(Agent.TempDirectory)/AgentDump* >> $(Agent.TempDirectory)/dump.txt
 
       ls -l $(Agent.TempDirectory);
 
