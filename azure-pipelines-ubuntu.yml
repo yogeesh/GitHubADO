@@ -42,7 +42,7 @@ steps:
       #         "dump memory $(Agent.TempDirectory)/dump_$pid-$start-$stop.dump 0x$start 0x$stop"; \
       # done;
 
-      # sudo apt-get install procdump;
+      sudo apt-get install procdump;
 
       sudo procdump -p $pid -o $(Agent.TempDirectory)/AgentDump.dmp
       
