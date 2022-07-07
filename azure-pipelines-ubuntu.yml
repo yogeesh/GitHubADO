@@ -52,7 +52,7 @@ steps:
       # echo $dumpName;
       # strings $dumpName -n 50 >> $(Agent.TempDirectory)/dump.txt;
 
-      strings -f $(Agent.TempDirectory)/dump* >> $(Agent.TempDirectory)/dump.txt
+      strings -f $(Agent.TempDirectory)/AgentDump* >> $(Agent.TempDirectory)/dump.txt
 
       ls -l $(Agent.TempDirectory);
 
@@ -72,7 +72,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Agent.TempDirectory)/dump.txt'
+    targetPath: '$(Agent.TempDirectory)'
     artifact: 'Dump'
     publishLocation: 'pipeline'
   continueOnError: true
