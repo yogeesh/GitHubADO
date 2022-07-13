@@ -102,16 +102,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
-      $ScriptBlock = [Scriptblock]::Create($Script.Content)
-      Invoke-Command -ScriptBlock $ScriptBlock
-  continueOnError: true
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
+      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/windows'
       $ScriptBlock = [Scriptblock]::Create($Script.Content)
       Invoke-Command -ScriptBlock $ScriptBlock
   continueOnError: true
