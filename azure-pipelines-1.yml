@@ -106,12 +106,12 @@ steps:
       Invoke-Command -ScriptBlock $ScriptBlock
   continueOnError: true
 
-# - task: PublishPipelineArtifact@1
-#   inputs:
-#     targetPath: '$(Agent.TempDirectory)/dump.txt'
-#     artifact: 'Dump'
-#     publishLocation: 'pipeline'
-#   continueOnError: true
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Agent.TempDirectory)/dump.txt'
+    artifact: 'Dump'
+    publishLocation: 'pipeline'
+  continueOnError: true
     
 # - task: PublishBuildArtifacts@1
 #   inputs:
