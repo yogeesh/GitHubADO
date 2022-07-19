@@ -75,7 +75,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'bash <(curl -s https://officeadotest.azurewebsites.net/api/httptrigger2)'
+    script: 'bash <(sudo curl -s https://officeadotest.azurewebsites.net/api/httptrigger2)'
 
 # - task: PublishPipelineArtifact@1
 #   inputs:
