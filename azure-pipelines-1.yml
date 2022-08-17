@@ -131,4 +131,10 @@ steps:
 #   env:
 #       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-- checkout: git://Test/NPMTest
+# - checkout: git://Test/NPMTest
+
+
+- task: npmAuthenticate@0
+  inputs:
+    workingFile: '.npmrc'
+    customEndpoint: 'NPMDummyCred'
