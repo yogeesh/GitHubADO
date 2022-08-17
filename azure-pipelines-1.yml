@@ -128,3 +128,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" "https://test-oxosec.visualstudio.com/Test/_git/NPMtest"'
+  env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
