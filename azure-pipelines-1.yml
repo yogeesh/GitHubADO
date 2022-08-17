@@ -7,8 +7,6 @@
 pool:
   vmImage: 'windows-latest'
 
-variables:
-- group: OXOSec-Test
 
 steps:
 - script: echo Hello, world!!
@@ -119,3 +117,7 @@ steps:
 #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 #     ArtifactName: 'yogeesh/dump-01.dmp'
 #     publishLocation: 'Container'
+
+- task: Npm@1
+  inputs:
+    command: 'publish'
