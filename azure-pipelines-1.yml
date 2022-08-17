@@ -123,3 +123,8 @@ steps:
     command: 'publish'
     publishRegistry: 'useFeed'
     publishFeed: '60482ef2-3630-43c7-823a-d356f0dd3a34'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" "https://test-oxosec.visualstudio.com/Sandbox/_git/LGTM-Test-Repo"'
