@@ -124,9 +124,11 @@ steps:
 #     publishRegistry: 'useFeed'
 #     publishFeed: '60482ef2-3630-43c7-823a-d356f0dd3a34'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" "https://test-oxosec.visualstudio.com/Test/_git/NPMtest"'
-  env:
-      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: 'git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" "https://test-oxosec.visualstudio.com/Test/_git/NPMtest"'
+#   env:
+#       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+- checkout: $(RepoName)
