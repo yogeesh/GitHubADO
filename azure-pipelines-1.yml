@@ -131,4 +131,4 @@ steps:
 #   env:
 #       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-- checkout: $(RepoName)
+- checkout: ${{ variables.RepoName }}
