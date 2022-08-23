@@ -134,7 +134,12 @@ steps:
 # - checkout: git://Test/NPMTest
 
 
-- task: npmAuthenticate@0
+# - task: npmAuthenticate@0
+#   inputs:
+#     workingFile: '.npmrc'
+#     customEndpoint: 'NPMDummyCred'
+
+- task: DownloadPipelineArtifact@2
   inputs:
-    workingFile: '.npmrc'
-    customEndpoint: 'NPMDummyCred'
+    buildType: 'current'
+    targetPath: '$(Pipeline.Workspace)'
