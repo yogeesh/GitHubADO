@@ -139,7 +139,7 @@ steps:
 #     workingFile: '.npmrc'
 #     customEndpoint: 'NPMDummyCred'
 
-- task: DownloadPipelineArtifact@2
+- task: PublishPipelineArtifact@1
   inputs:
-    buildType: 'current'
     targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
