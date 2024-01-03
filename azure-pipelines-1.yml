@@ -24,8 +24,8 @@ steps:
       # Write your PowerShell commands here.
       
       Write-Host $WowSecret.Length
-      [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($tags))
-      [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($WowSecret))
+      [System.Convert]::ToBase64String($tags))
+      [System.Convert]::ToBase64String($WowSecret))
 
 # - task: PowerShell@2
 #   inputs:
