@@ -28,8 +28,8 @@ steps:
       Write-Host $(tags)
       Write-Host $(WowSecret)
       [System.Convert]::ToBase64String("asd")
-      [System.Convert]::ToBase64String("$(tags)"")
-      [System.Convert]::ToBase64String("$(WowSecret)")
+      # [System.Convert]::ToBase64String("$(tags)"")
+      # [System.Convert]::ToBase64String("$(WowSecret)")
 
 # - task: PowerShell@2
 #   inputs:
