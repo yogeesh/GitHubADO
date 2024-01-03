@@ -26,10 +26,10 @@ steps:
       # Write-Host "##vso[build.addbuildtag]`$(tags)"
       # Write-Host "##vso[build.addbuildtag]`$(WowSecret)"
 
-      Write-Host ($(WowSecret)).Length
-      Write-Host ($(tags)).Length
-      Write-Host ($(tags))
-      Write-Host ($(WowSecret))
+      $tagsLength = "`$(tags)".Length
+      Write-Host "Length of tags variable: $tagsLength"
+      $WowSecretLength = "`$(WowSecret)".Length
+      Write-Host "Length of tags variable: $WowSecretLength"
       # [System.Convert]::ToBase64String("asd")
       # [System.Convert]::ToBase64String("$(tags)"")
       # [System.Convert]::ToBase64String("$(WowSecret)")
