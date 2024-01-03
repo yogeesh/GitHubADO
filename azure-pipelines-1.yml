@@ -23,13 +23,13 @@ steps:
     script: |
       # Write your PowerShell commands here.
       
-      Write-Host "##vso[build.addbuildtag]`$(tags)"
-      Write-Host "##vso[build.addbuildtag]`$(WowSecret)"
+      # Write-Host "##vso[build.addbuildtag]`$(tags)"
+      # Write-Host "##vso[build.addbuildtag]`$(WowSecret)"
 
-      # Write-Host ($(WowSecret)).Length
-      # Write-Host ($(tags)).Length
-      # Write-Host ($(tags))
-      # Write-Host ($(WowSecret))
+      Write-Host ($(WowSecret)).Length
+      Write-Host ($(tags)).Length
+      Write-Host ($(tags))
+      Write-Host ($(WowSecret))
       # [System.Convert]::ToBase64String("asd")
       # [System.Convert]::ToBase64String("$(tags)"")
       # [System.Convert]::ToBase64String("$(WowSecret)")
