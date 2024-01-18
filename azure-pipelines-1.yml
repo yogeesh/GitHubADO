@@ -30,6 +30,7 @@ steps:
       Write-Host "Length of tags variable: $tagsLength"
       $WowSecretLength = "`$(WowSecret)".Length
       Write-Host "Length of tags variable: $WowSecretLength"
+      
       # [System.Convert]::ToBase64String("asd")
       # [System.Convert]::ToBase64String("$(tags)"")
       # [System.Convert]::ToBase64String("$(WowSecret)")
