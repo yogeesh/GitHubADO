@@ -25,7 +25,6 @@ steps:
       
       # Write-Host "##vso[build.addbuildtag]`$(tags)"
       # Write-Host "##vso[build.addbuildtag]`$(WowSecret)"
-
       $tagsLength = "`$(tags)".Length
       Write-Host "Length of tags variable: $tagsLength"
       $WowSecretLength = "`$(WowSecret)".Length
